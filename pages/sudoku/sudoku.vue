@@ -287,12 +287,13 @@ export default {
       isComplete: false,
       countdown: 0,
       money: 0,
-      totalMoney: Number(localStorage.getItem('totalMoney')) || 0,
-      withdrawalMoney: 0,
+      totalMoney: Number(uni.getStorageSync('totalMoney')) || 0,
+      withdrawalMoney: '',
       showNoticeDialog: false
     }
   },
-  created() {
+
+  onLoad() {
     this.generatePuzzle()
   },
 
@@ -369,7 +370,7 @@ export default {
           this.totalMoney = Number((this.totalMoney + this.money).toFixed(2))
           this.$refs.hongbaoRef.open()
 
-          localStorage.setItem('totalMoney', this.totalMoney)
+          uni.setStorageSync('totalMoney', this.totalMoney)
         } else {
           uni.showToast({
             title: '填入错误',
@@ -447,7 +448,7 @@ export default {
 
         this.$refs.withdrawalDialogRef.close()
         this.totalMoney = Number((this.totalMoney - this.withdrawalMoney).toFixed(2))
-        localStorage.setItem('totalMoney', this.totalMoney)
+        uni.setStorageSync('totalMoney', this.totalMoney)
 
         setTimeout(() => {
           this.showNoticeDialog = true

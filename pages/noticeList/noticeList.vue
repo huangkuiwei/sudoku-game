@@ -73,9 +73,14 @@ page {
 }
 
 .notice-list {
-  padding-top: 40rpx;
+  height: 100vh;
+  overflow: hidden;
+  padding: 70rpx 0 0;
+  display: flex;
+  flex-direction: column;
 
   .navbar {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -87,6 +92,7 @@ page {
 
       &.back {
         transform: rotate(180deg);
+        z-index: 9;
       }
     }
 
@@ -106,9 +112,12 @@ page {
   }
 
   .list {
+    flex-grow: 1;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 20rpx;
+    padding-bottom: 50rpx;
 
     .item {
       align-self: stretch;
