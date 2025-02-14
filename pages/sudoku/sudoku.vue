@@ -140,7 +140,9 @@ export default {
       handler(value) {
         if (value) {
           setTimeout(() => {
-            this.countdown -= 1
+            if (!this.isComplete) {
+              this.countdown -= 1
+            }
           }, 1000)
         } else {
           // 游戏结束
@@ -172,9 +174,9 @@ export default {
       this.initialBoard = JSON.parse(JSON.stringify(this.completeBoards[this.currentBoardIndex]))
       this.board = JSON.parse(JSON.stringify(this.initialBoard))
 
-      let removeNumber = this.currentBoardIndex + 3
+      let removeNumber = this.currentBoardIndex + 6
 
-      this.removeNumbers(this.board, removeNumber > 25 ? 25 : removeNumber)
+      this.removeNumbers(this.board, removeNumber > 10 ? 10 : removeNumber)
       this.selectedRow = -1
       this.selectedCol = -1
       this.isComplete = false
@@ -201,10 +203,6 @@ export default {
             this.$refs.hongbaoRef.open()
 
             this.isComplete = true
-            setTimeout(() => {
-              this.currentBoardIndex++
-              this.generatePuzzle()
-            }, 2000)
           } else {
             let moneyData = uni.getStorageSync('moneyData')[0]
             let money = Number(moneyData.minMoney) + Math.random() * (moneyData.maxMoney - moneyData.minMoney)
