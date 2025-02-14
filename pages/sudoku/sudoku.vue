@@ -20,21 +20,21 @@
       </view>
     </view>
 
-    <view>
-      <view class="sudoku-board">
-        <view v-for="(row, rowIndex) in board" :key="rowIndex" class="row">
-          <view
-              v-for="(cell, colIndex) in row"
-              :key="colIndex"
-              class="cell"
-              :class="{ 'filled': cell !== 0, 'selected': selectedRow === rowIndex && selectedCol === colIndex && !isFixed(rowIndex, colIndex) }"
-              @click="selectCell(rowIndex, colIndex)"
-          >
-            {{ cell === 0 ? '' : cell }}
-          </view>
+    <view class="sudoku-board">
+      <view v-for="(row, rowIndex) in board" :key="rowIndex" class="row">
+        <view
+            v-for="(cell, colIndex) in row"
+            :key="colIndex"
+            class="cell"
+            :class="{ 'filled': cell !== 0, 'selected': selectedRow === rowIndex && selectedCol === colIndex && !isFixed(rowIndex, colIndex) }"
+            @click="selectCell(rowIndex, colIndex)"
+        >
+          {{ cell === 0 ? '' : cell }}
         </view>
       </view>
+    </view>
 
+    <view>
       <view class="tip">填入数字，保证每一行列的数字不重复</view>
 
       <view class="controls">
